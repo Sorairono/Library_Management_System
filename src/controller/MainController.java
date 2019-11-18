@@ -31,10 +31,11 @@ public class MainController implements Initializable {
 		try {
 			FXMLLoader secondLoader = new FXMLLoader(getClass().getResource("/fxml_document/TabBooksView.fxml"));
 			Parent secondUI = secondLoader.load();
-			SingletonController.getInstance().setTab_books_controller(secondLoader.getController());
+//			SingletonController.getInstance().setTab_books_controller(secondLoader.getController());
 			tab_books.setContent(secondUI);
+			System.out.println("Tab Books created");
 		} catch (Exception e) {
-
+			System.out.println("Failed 1");
 		}
 		
 		try {
@@ -42,7 +43,9 @@ public class MainController implements Initializable {
 			Parent secondUI = secondLoader.load();
 			SingletonController.getInstance().setTab_borrowers_controller(secondLoader.getController());
 			tab_borrowers.setContent(secondUI);
+			System.out.println("Tab Borrowers created");
 		} catch (Exception e) {
+			System.out.println("Failed 2");
 
 		}
 		
@@ -51,8 +54,9 @@ public class MainController implements Initializable {
 			Parent secondUI = secondLoader.load();
 			SingletonController.getInstance().setTab_loans_controller(secondLoader.getController());
 			tab_loans.setContent(secondUI);
+			System.out.println("Tab Loans created");
 		} catch (Exception e) {
-
+			System.out.println("Failed 3");
 		}
 	}
 

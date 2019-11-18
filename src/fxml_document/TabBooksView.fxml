@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
-   <center>
-      <AnchorPane BorderPane.alignment="CENTER" />
-   </center>
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TabBooksController">
    <top>
-      <AnchorPane prefHeight="100.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXTextField fx:id="tx_search" focusColor="AQUA" layoutX="125.0" layoutY="50.0" promptText="Search" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="50.0" />
+            <JFXButton buttonType="RAISED" prefWidth="75.0" ripplerFill="AQUA" text="Enter" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
+         </children></AnchorPane>
    </top>
    <left>
       <AnchorPane prefWidth="100.0" BorderPane.alignment="CENTER" />
@@ -21,4 +23,7 @@
    <bottom>
       <AnchorPane prefHeight="100.0" BorderPane.alignment="CENTER" />
    </bottom>
+   <center>
+      <TableView fx:id="tb_books" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>
