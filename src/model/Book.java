@@ -7,14 +7,15 @@ public class Book {
 	private String Author;
 	private String Cover;
 	private String Publisher;
-	private String Pages;
+	private int Pages;
+	private boolean Checked_out;
 
 	public Book() {
 
 	}
 
-	public Book(String iSBN10, String iSBN13, String title, String author, String cover, String publisher,
-			String pages) {
+	public Book(String iSBN10, String iSBN13, String title, String author, String cover, String publisher, int pages,
+			boolean checked_out) {
 		super();
 		ISBN10 = iSBN10;
 		ISBN13 = iSBN13;
@@ -23,6 +24,7 @@ public class Book {
 		Cover = cover;
 		Publisher = publisher;
 		Pages = pages;
+		Checked_out = checked_out;
 	}
 
 	public String getISBN10() {
@@ -73,12 +75,20 @@ public class Book {
 		Publisher = publisher;
 	}
 
-	public String getPages() {
+	public int getPages() {
 		return Pages;
 	}
 
-	public void setPages(String pages) {
+	public void setPages(int pages) {
 		Pages = pages;
+	}
+
+	public boolean isChecked_out() {
+		return Checked_out;
+	}
+
+	public void setChecked_out(boolean checked_out) {
+		Checked_out = checked_out;
 	}
 
 }
