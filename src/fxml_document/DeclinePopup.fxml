@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" onMouseDragged="#draged" onMousePressed="#pressed" fx:controller="controller.DeclineController">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="500.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="label" alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="52.0" prefHeight="100.0" textAlignment="CENTER" wrapText="true" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0" />
+            <JFXButton fx:id="btn_ok" prefHeight="25.0" prefWidth="100.0" text="OK" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

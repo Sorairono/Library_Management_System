@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXTabPane;
 
+import core.SQLConnector;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,6 +25,14 @@ public class MainController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		try {
+			SQLConnector sql_connector = new SQLConnector("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/Library?useSSL=false", "root", "89621139chan");
+			SingletonController.getInstance().setSql_connector(sql_connector);
+			System.out.println("Successful connection established");
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Failed to connect");
+		}
 		SingletonController.getInstance().setMain_controller(this);
 		tab_pane_main.getTabs().addAll(tab_books, tab_borrowers, tab_loans);
 		tab_pane_main.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
@@ -31,7 +40,7 @@ public class MainController implements Initializable {
 		try {
 			FXMLLoader secondLoader = new FXMLLoader(getClass().getResource("/fxml_document/TabBooksView.fxml"));
 			Parent secondUI = secondLoader.load();
-//			SingletonController.getInstance().setTab_books_controller(secondLoader.getController());
+			SingletonController.getInstance().setTab_books_controller(secondLoader.getController());
 			tab_books.setContent(secondUI);
 			System.out.println("Tab Books created");
 		} catch (Exception e) {

@@ -1,14 +1,15 @@
 package singleton;
 
 import controller.*;
+import core.SQLConnector;
 
 public class SingletonController {
 	private static SingletonController instance;
-	
+
 	private SingletonController() {
-		
+
 	}
-	
+
 	public static SingletonController getInstance() {
 		if (instance == null) {
 			synchronized (SingletonController.class) {
@@ -19,12 +20,14 @@ public class SingletonController {
 		}
 		return instance;
 	}
-	
+
 	private MainController main_controller;
 	private TabBooksController tab_books_controller;
 	private TabBorrowersController tab_borrowers_controller;
 	private TabLoansController tab_loans_controller;
-	
+	private SQLConnector sql_connector;
+	private CheckoutController checkout_controller;
+
 	public MainController getMain_controller() {
 		return main_controller;
 	}
@@ -56,5 +59,21 @@ public class SingletonController {
 	public void setTab_loans_controller(TabLoansController tab_loans_controller) {
 		this.tab_loans_controller = tab_loans_controller;
 	}
-	
+
+	public SQLConnector getSql_connector() {
+		return sql_connector;
+	}
+
+	public void setSql_connector(SQLConnector sql_connector) {
+		this.sql_connector = sql_connector;
+	}
+
+	public CheckoutController getCheckout_controller() {
+		return checkout_controller;
+	}
+
+	public void setCheckout_controller(CheckoutController checkout_controller) {
+		this.checkout_controller = checkout_controller;
+	}
+
 }
