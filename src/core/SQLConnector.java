@@ -1,11 +1,13 @@
 package core;
 
 import model.Book;
+import model.Loan;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.sql.ResultSet;
 
 import java.util.List;
@@ -80,6 +82,25 @@ public class SQLConnector {
 			stmnt.execute(query);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
+		}
+	}
+	
+	public List<Loan> getLoanList() throws SQLException {
+		try (Statement stmnt = connection.createStatement();
+				ResultSet rs = stmnt.executeQuery(
+						"SELECT * FROM BOOK_LOANS");) {
+			List<Loan> loanList = new ArrayList<>();
+			while (rs.next()) {
+				int Loan_id = rs.getInt("Loan_id");
+				String ISBN10 = rs.getString("ISBN10");
+				String ISBN13 = rs.getString("ISBN13");
+				int Borrower_id = rs.getInt("Borrower_id");
+				Timestamp Date_out = rs.getTimestamp("Date_out");
+				Timestamp Due_date = rs.getTimestamp("Due_date");
+				Timestamp Date_in = rs.getTimestamp("Date_in");
+				loanList.add(new Loan(Loan_id, ISBN10, ISBN13, Borrower_id, Date_out, Due_date, Date_in));
+			}
+			return loanList;
 		}
 	}
 }
