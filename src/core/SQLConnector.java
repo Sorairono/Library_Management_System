@@ -2,7 +2,9 @@ package core;
 
 import model.Book;
 import model.Loan;
+import singleton.Singleton;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -11,6 +13,14 @@ import java.sql.Timestamp;
 import java.sql.ResultSet;
 
 import java.util.List;
+
+import application.Main;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
 import java.util.ArrayList;
 
 public class SQLConnector {
@@ -73,15 +83,17 @@ public class SQLConnector {
 		}
 	}
 
-	public void insertLoan(Book current_book, int borrower_id) throws SQLException {
+	public String insertLoan(Book current_book, int borrower_id) throws SQLException {
 		String query = "INSERT INTO BOOK_LOANS (ISBN10, ISBN13, Borrower_id, Date_out, Due_date) VALUES ('"
 				+ current_book.getISBN10() + "' , '" + current_book.getISBN13() + "' ," + borrower_id + ","
 				+ " NOW(), DATE_ADD(NOW(), INTERVAL  14 DAY))";
 		try {
 			Statement stmnt = connection.prepareStatement(query);
 			stmnt.execute(query);
+			return "";
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
+			return e.getMessage();
 		}
 	}
 	

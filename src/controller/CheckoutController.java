@@ -65,30 +65,41 @@ public class CheckoutController implements Initializable {
 		publisher.setText(current_book.getPublisher());
 		card_no_input.setOnAction(e -> {
 			try {
-				SingletonController.getInstance().getSql_connector().insertLoan(current_book, Integer.parseInt(card_no_input.getText()));
-				System.out.println("Book successfully checked out");
+				String err_msg = SingletonController.getInstance().getSql_connector().insertLoan(current_book, Integer.parseInt(card_no_input.getText()));
+				System.out.println("AAAA: " + err_msg);
+				if (err_msg.compareTo("") == 0) {
+					Singleton.getInstance().setDecline_message("Successfully checkout this book");
+					try {
+						FXMLLoader fourthLoader = new FXMLLoader(getClass().getResource("/fxml_document/DeclinePopup.fxml"));
+						Parent fourthUI = fourthLoader.load();
+						Stage dialogStage = new Stage();
+						dialogStage.setTitle("Checkout book successful");
+						dialogStage.initOwner(Main.getInstance().getPrimaryStage());
+						dialogStage.initModality(Modality.WINDOW_MODAL);
+						Scene scene = new Scene(fourthUI);
+						dialogStage.setScene(scene);
+						dialogStage.show();
+					} catch (Exception ex) {
+						// TODO Auto-generated catch block
+					}
+				} else {
+					Singleton.getInstance().setDecline_message(err_msg);
+					try {
+						FXMLLoader fourthLoader = new FXMLLoader(getClass().getResource("/fxml_document/DeclinePopup.fxml"));
+						Parent fourthUI = fourthLoader.load();
+						Stage dialogStage = new Stage();
+						dialogStage.setTitle("Checkout book failed");
+						dialogStage.initOwner(Main.getInstance().getPrimaryStage());
+						dialogStage.initModality(Modality.WINDOW_MODAL);
+						Scene scene = new Scene(fourthUI);
+						dialogStage.setScene(scene);
+						dialogStage.show();
+					} catch (Exception ex) {
+						// TODO Auto-generated catch block
+					}
+				}
 			} catch (SQLException ex) {
-				// TODO: handle exception
-				System.out.println("AAAA");
-			}
-			if (card_no_input.getText().compareTo("0") == 0) {
-				Singleton.getInstance().setDecline_message("This user already borrowed 3 books");
-				try {
-					FXMLLoader fourthLoader = new FXMLLoader(getClass().getResource("/fxml_document/DeclinePopup.fxml"));
-					Parent fourthUI = fourthLoader.load();
-					Stage dialogStage = new Stage();
-					dialogStage.setTitle("Checkout book failed");
-					dialogStage.initOwner(Main.getInstance().getPrimaryStage());
-					dialogStage.initModality(Modality.WINDOW_MODAL);
-					Scene scene = new Scene(fourthUI);
-					dialogStage.setScene(scene);
-					dialogStage.show();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}	
-			} else {
-				current_book.setChecked_out(true);
+				System.out.println("Book checkout failed");
 			}
 		});
 	}
