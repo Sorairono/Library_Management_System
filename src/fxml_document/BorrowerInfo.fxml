@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.BorrowerInfoController">
+   <center>
+      <AnchorPane BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="25.0" prefWidth="100.0" text="First Name" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Label alignment="CENTER" prefHeight="25.0" prefWidth="100.0" text="Last Name" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="25.0" />
+            <Label alignment="CENTER" prefHeight="25.0" prefWidth="100.0" text="SSN" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="50.0" />
+            <Label alignment="CENTER" prefHeight="25.0" prefWidth="100.0" text="E-mail" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="75.0" />
+            <Label alignment="CENTER" prefHeight="25.0" prefWidth="100.0" text="Address" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="100.0" />
+            <Label alignment="CENTER" prefHeight="25.0" prefWidth="100.0" text="City" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="125.0" />
+            <Label alignment="CENTER" prefHeight="25.0" prefWidth="100.0" text="State" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="150.0" />
+            <Label alignment="CENTER" prefHeight="25.0" prefWidth="100.0" text="Phone" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="175.0" />
+            <JFXTextField fx:id="tf_first_name" focusColor="AQUA" prefWidth="400.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="0.0" />
+            <JFXTextField fx:id="tf_last_name" focusColor="AQUA" prefWidth="400.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="25.0" />
+            <JFXTextField fx:id="tf_ssn" focusColor="AQUA" prefWidth="400.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="50.0" />
+            <JFXTextField fx:id="tf_email" focusColor="AQUA" prefWidth="400.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="75.0" />
+            <JFXTextField fx:id="tf_address" focusColor="AQUA" prefWidth="400.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="100.0" />
+            <JFXTextField fx:id="tf_city" focusColor="AQUA" prefWidth="400.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="125.0" />
+            <JFXTextField fx:id="tf_state" focusColor="AQUA" prefWidth="400.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="150.0" />
+            <JFXTextField fx:id="tf_phone" focusColor="AQUA" prefWidth="400.0" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="175.0" />
+         </children>
+      </AnchorPane>
+   </center>
+   <left>
+      <AnchorPane prefWidth="50.0" BorderPane.alignment="CENTER" />
+   </left>
+   <top>
+      <AnchorPane prefHeight="50.0" BorderPane.alignment="CENTER" />
+   </top>
+   <right>
+      <AnchorPane prefWidth="50.0" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <AnchorPane prefHeight="75.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton alignment="CENTER" buttonType="RAISED" prefWidth="75.0" ripplerFill="AQUA" text="Cancel" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="25.0" />
+            <JFXButton alignment="CENTER" buttonType="RAISED" prefWidth="75.0" ripplerFill="AQUA" text="OK" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="25.0" />
+         </children></AnchorPane>
+   </bottom>
+</BorderPane>

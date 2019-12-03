@@ -1,5 +1,7 @@
 package singleton;
 
+import javafx.stage.Stage;
+
 public class Singleton {
 
 	private static Singleton instance;
@@ -20,6 +22,7 @@ public class Singleton {
 	}
 
 	private String decline_message;
+	private Stage dialogStage;
 
 	public String getDecline_message() {
 		return decline_message;
@@ -29,4 +32,11 @@ public class Singleton {
 		this.decline_message = decline_message;
 	}
 
+	public Stage getDialogStage() {
+		return dialogStage;
+	}
+
+	public void setDialogStage(Stage dialogStage) {
+		this.dialogStage = dialogStage;
+	}
 }

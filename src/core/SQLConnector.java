@@ -1,12 +1,12 @@
 package core;
 
-import model.Book;
-import model.Loan;
+import model.*;
 import singleton.Singleton;
 
-import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
@@ -14,14 +14,8 @@ import java.sql.ResultSet;
 
 import java.util.List;
 
-import application.Main;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class SQLConnector {
 	private Connection connection;
@@ -62,8 +56,7 @@ public class SQLConnector {
 	}
 
 	public List<Book> searchBookList(String search_command) throws SQLException {
-		try (Statement stmnt = connection.createStatement(); 
-				ResultSet rs = stmnt.executeQuery(search_command);) {
+		try (Statement stmnt = connection.createStatement(); ResultSet rs = stmnt.executeQuery(search_command);) {
 			List<Book> bookList = new ArrayList<>();
 			while (rs.next()) {
 				String ISBN10 = rs.getString("ISBN10");
@@ -83,24 +76,34 @@ public class SQLConnector {
 		}
 	}
 
-	public String insertLoan(Book current_book, int borrower_id) throws SQLException {
-		String query = "INSERT INTO BOOK_LOANS (ISBN10, ISBN13, Borrower_id, Date_out, Due_date) VALUES ('"
-				+ current_book.getISBN10() + "' , '" + current_book.getISBN13() + "' ," + borrower_id + ","
-				+ " NOW(), DATE_ADD(NOW(), INTERVAL  14 DAY))";
+	public boolean insertLoan(Book current_book, int borrower_id) throws SQLException {
+		String insert = "INSERT INTO BOOK_LOANS (ISBN10, ISBN13, Borrower_id, Date_out, Due_date)"
+				+ "VALUES (?, ?, ?, ?, ?)";
+		Calendar calendar = Calendar.getInstance();
+		Date startDate = new Date(calendar.getTime().getTime());
+		System.out.println(calendar.getTime().getTime());
+		calendar.add(Calendar.DATE, 14);
+		Date dueDate = new Date(calendar.getTime().getTime());
+		System.out.println(calendar.getTime().getTime());
 		try {
-			Statement stmnt = connection.prepareStatement(query);
-			stmnt.execute(query);
-			return "";
+			PreparedStatement preparedStatement = connection.prepareStatement(insert);
+			preparedStatement.setString(1, current_book.getISBN10());
+			preparedStatement.setString(2, current_book.getISBN13());
+			preparedStatement.setInt(3, borrower_id);
+			preparedStatement.setDate(4, startDate);
+			preparedStatement.setDate(5, dueDate);
+			preparedStatement.execute();
+			return true;
 		} catch (SQLException e) {
-			System.out.println(e.getMessage());
-			return e.getMessage();
+			// TODO: handle exception
+			Singleton.getInstance().setDecline_message(e.getMessage());
+			return false;
 		}
 	}
-	
+
 	public List<Loan> getLoanList() throws SQLException {
 		try (Statement stmnt = connection.createStatement();
-				ResultSet rs = stmnt.executeQuery(
-						"SELECT * FROM BOOK_LOANS");) {
+				ResultSet rs = stmnt.executeQuery("SELECT * FROM BOOK_LOANS");) {
 			List<Loan> loanList = new ArrayList<>();
 			while (rs.next()) {
 				int Loan_id = rs.getInt("Loan_id");
@@ -113,6 +116,27 @@ public class SQLConnector {
 				loanList.add(new Loan(Loan_id, ISBN10, ISBN13, Borrower_id, Date_out, Due_date, Date_in));
 			}
 			return loanList;
+		}
+	}
+
+	public List<Borrower> getBorrowerList() throws SQLException {
+		try (Statement stmnt = connection.createStatement();
+				ResultSet rs = stmnt.executeQuery("SELECT * FROM BORROWER");) {
+			List<Borrower> borrower_list = new ArrayList<>();
+			while (rs.next()) {
+				int borrower_id = rs.getInt("borrower_id");
+				String ssn = rs.getString("ssn");
+				String first_name = rs.getString("first_name");
+				String last_name = rs.getString("last_name");
+				String email = rs.getString("email");
+				String address = rs.getString("address");
+				String city = rs.getString("city");
+				String state = rs.getString("state");
+				String phone = rs.getString("phone");
+				borrower_list
+						.add(new Borrower(borrower_id, ssn, first_name, last_name, email, address, city, state, phone));
+			}
+			return borrower_list;
 		}
 	}
 }

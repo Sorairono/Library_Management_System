@@ -1,9 +1,11 @@
 package controller;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import model.*;
+import singleton.*;
 
 import com.jfoenix.controls.JFXTextField;
 
@@ -18,10 +20,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Book;
-import singleton.Singleton;
-import singleton.SingletonBooks;
-import singleton.SingletonController;
 
 public class CheckoutController implements Initializable {
 
@@ -54,23 +52,29 @@ public class CheckoutController implements Initializable {
 	private Label availability;
 	@FXML
 	private JFXTextField card_no_input;
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		Book current_book = SingletonBooks.getInstance().getCurrent_book_choice();
+		Book current_book = SingletonChoice.getInstance().getCurrent_book_choice();
 		isbn_10.setText(current_book.getISBN10());
 		isbn_13.setText(current_book.getISBN13());
 		title.setText(current_book.getTitle());
+		author.setText(current_book.getAuthor());
 		publisher.setText(current_book.getPublisher());
+		if (current_book.isChecked_out()) {
+			availability.setText("No");
+		} else {
+			availability.setText("Yes");
+		}
 		card_no_input.setOnAction(e -> {
 			try {
-				String err_msg = SingletonController.getInstance().getSql_connector().insertLoan(current_book, Integer.parseInt(card_no_input.getText()));
-				System.out.println("AAAA: " + err_msg);
-				if (err_msg.compareTo("") == 0) {
+				if (SingletonController.getInstance().getSql_connector().insertLoan(current_book,
+						Integer.parseInt(card_no_input.getText()))) {
 					Singleton.getInstance().setDecline_message("Successfully checkout this book");
 					try {
-						FXMLLoader fourthLoader = new FXMLLoader(getClass().getResource("/fxml_document/DeclinePopup.fxml"));
+						FXMLLoader fourthLoader = new FXMLLoader(
+								getClass().getResource("/fxml_document/MessagePopup.fxml"));
 						Parent fourthUI = fourthLoader.load();
 						Stage dialogStage = new Stage();
 						dialogStage.setTitle("Checkout book successful");
@@ -80,12 +84,12 @@ public class CheckoutController implements Initializable {
 						dialogStage.setScene(scene);
 						dialogStage.show();
 					} catch (Exception ex) {
-						// TODO Auto-generated catch block
+
 					}
 				} else {
-					Singleton.getInstance().setDecline_message(err_msg);
 					try {
-						FXMLLoader fourthLoader = new FXMLLoader(getClass().getResource("/fxml_document/DeclinePopup.fxml"));
+						FXMLLoader fourthLoader = new FXMLLoader(
+								getClass().getResource("/fxml_document/MessagePopup.fxml"));
 						Parent fourthUI = fourthLoader.load();
 						Stage dialogStage = new Stage();
 						dialogStage.setTitle("Checkout book failed");
@@ -95,13 +99,13 @@ public class CheckoutController implements Initializable {
 						dialogStage.setScene(scene);
 						dialogStage.show();
 					} catch (Exception ex) {
-						// TODO Auto-generated catch block
+
 					}
 				}
 			} catch (SQLException ex) {
-				System.out.println("Book checkout failed");
+
 			}
 		});
 	}
-	
+
 }

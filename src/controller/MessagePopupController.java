@@ -14,7 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import singleton.Singleton;
 
-public class DeclineController implements Initializable {
+public class MessagePopupController implements Initializable {
 	@FXML
 	private Label label;
 	@FXML
@@ -45,6 +45,7 @@ public class DeclineController implements Initializable {
 				Node node = (Node) event.getSource();
 				Stage stage = (Stage) node.getScene().getWindow();
 				stage.close();
+				Singleton.getInstance().getDialogStage().close();
 			}
 		});;
 	}
