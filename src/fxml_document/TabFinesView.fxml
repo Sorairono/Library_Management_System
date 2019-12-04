@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.TabFinesController">
+   <center>
+      <TableView fx:id="tb_fines" BorderPane.alignment="CENTER" />
+   </center>
+   <top>
+      <AnchorPane prefHeight="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXTextField fx:id="tx_search" focusColor="AQUA" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="50.0" />
+            <Label prefHeight="25.0" prefWidth="50.0" text="Filter" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="50.0" />
+            <JFXComboBox fx:id="cb_filter" focusColor="AQUA" prefWidth="175.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <AnchorPane prefWidth="100.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <AnchorPane prefWidth="100.0" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <AnchorPane prefHeight="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label prefHeight="25.0" text="Total: " AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="25.0" />
+            <Label fx:id="lb_total" prefHeight="25.0" prefWidth="75.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="25.0" />
+            <JFXButton onAction="#on_pay_fines" text="Pay Fines" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="25.0" />
+         </children>
+      </AnchorPane>
+   </bottom>
+</BorderPane>

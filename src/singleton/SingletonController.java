@@ -25,6 +25,16 @@ public class SingletonController {
 	private TabBooksController tab_books_controller;
 	private TabBorrowersController tab_borrowers_controller;
 	private TabLoansController tab_loans_controller;
+	private TabFinesController tab_fines_controller;
+
+	public TabFinesController getTab_fines_controller() {
+		return tab_fines_controller;
+	}
+
+	public void setTab_fines_controller(TabFinesController tab_fines_controller) {
+		this.tab_fines_controller = tab_fines_controller;
+	}
+
 	private SQLConnector sql_connector;
 	private CheckoutController checkout_controller;
 
@@ -76,4 +86,9 @@ public class SingletonController {
 		this.checkout_controller = checkout_controller;
 	}
 
+	public void refresh_data() {
+		tab_books_controller.load_books_list();
+		tab_borrowers_controller.load_borrowers_list();
+		tab_loans_controller.load_loans_list();
+	}
 }

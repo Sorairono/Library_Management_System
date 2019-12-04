@@ -41,8 +41,8 @@
    <bottom>
       <AnchorPane prefHeight="75.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton alignment="CENTER" buttonType="RAISED" prefWidth="75.0" ripplerFill="AQUA" text="Cancel" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="25.0" />
-            <JFXButton alignment="CENTER" buttonType="RAISED" prefWidth="75.0" ripplerFill="AQUA" text="OK" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="25.0" />
+            <JFXButton onAction="#on_cancel" alignment="CENTER" buttonType="RAISED" prefWidth="75.0" ripplerFill="AQUA" text="Cancel" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="25.0" />
+            <JFXButton onAction="#on_ok" alignment="CENTER" buttonType="RAISED" prefWidth="75.0" ripplerFill="AQUA" text="OK" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="25.0" />
          </children></AnchorPane>
    </bottom>
 </BorderPane>

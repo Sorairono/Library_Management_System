@@ -3,8 +3,6 @@ package controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.jfoenix.controls.JFXButton;
-
 import application.Main;
 import core.SQLConnector;
 import javafx.collections.FXCollections;
@@ -14,8 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -24,7 +20,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Borrower;
 import singleton.Singleton;
-import singleton.SingletonChoice;
 import singleton.SingletonController;
 
 public class TabBorrowersController implements Initializable {
@@ -103,7 +98,7 @@ public class TabBorrowersController implements Initializable {
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			Singleton.getInstance().setDialogStage(dialogStage);
 			dialogStage.showAndWait();
-			load_borrowers_list();
+			SingletonController.getInstance().refresh_data();
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("Failed to open dialog to add");

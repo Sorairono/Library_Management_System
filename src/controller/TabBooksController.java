@@ -73,7 +73,7 @@ public class TabBooksController implements Initializable {
 //						System.out.println("Refreshed book list");
 //					});
 					dialogStage.showAndWait();
-					load_books_list();
+					SingletonController.getInstance().refresh_data();
 				} catch (Exception e) {
 					// TODO: handle exception
 				}

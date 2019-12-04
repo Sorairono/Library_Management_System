@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXTextField;
 
 import core.SQLConnector;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -44,7 +43,6 @@ public class TabLoansController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		sql_connector = SingletonController.getInstance().getSql_connector();
-		load_loans_list();
 		contextMenu.getItems().add(checkinMenu);
 		tb_loans.getColumns().addAll(tc_loanId, tc_isbn10, tc_isbn13, tc_borrowerId, tc_date_out, tc_due_date,
 				tc_date_in);
@@ -62,7 +60,7 @@ public class TabLoansController implements Initializable {
 		tc_date_out.prefWidthProperty().bind(tb_loans.widthProperty().multiply(0.2));
 		tc_due_date.prefWidthProperty().bind(tb_loans.widthProperty().multiply(0.2));
 		tc_date_in.prefWidthProperty().bind(tb_loans.widthProperty().multiply(0.2));
-		tb_loans.setItems(loans_list);
+		load_loans_list();
 		tb_loans.setOnContextMenuRequested(new EventHandler<ContextMenuEvent>() {
 			@Override
 			public void handle(ContextMenuEvent event) {
@@ -81,7 +79,7 @@ public class TabLoansController implements Initializable {
 			// TODO: handle exception
 			System.out.println("Failed to get loan list");
 		}
-		tb_loans.refresh();
+		tb_loans.setItems(loans_list);
 	}
 
 }

@@ -100,6 +100,27 @@ public class SQLConnector {
 			return false;
 		}
 	}
+	
+	public boolean insertBorrower(Borrower new_borrower) throws SQLException {
+		String insert = "INSERT INTO BORROWER (ssn, first_name, last_name, email, address, city, state, phone)" + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(insert);
+			preparedStatement.setString(1, new_borrower.getSsn());
+			preparedStatement.setString(2, new_borrower.getFirst_name());
+			preparedStatement.setString(3, new_borrower.getLast_name());
+			preparedStatement.setString(4, new_borrower.getEmail());
+			preparedStatement.setString(5, new_borrower.getAddress());
+			preparedStatement.setString(6, new_borrower.getCity());
+			preparedStatement.setString(7, new_borrower.getState());
+			preparedStatement.setString(8, new_borrower.getPhone());
+			preparedStatement.execute();
+			return true;
+		} catch (SQLException e) {
+			// TODO: handle exception
+			Singleton.getInstance().setDecline_message(e.getMessage());
+			return false;
+		}
+	}
 
 	public List<Loan> getLoanList() throws SQLException {
 		try (Statement stmnt = connection.createStatement();
@@ -139,4 +160,21 @@ public class SQLConnector {
 			return borrower_list;
 		}
 	}
+	
+//    public List<Borrower> searchBorrowerList(String search_command) throws SQLException {
+//        try (Statement stmnt = connection.createStatement();
+//                ResultSet rs = stmnt.executeQuery("SELECT * FROM BORROWER WHERE Bname IS LIKE" + search_command);) {
+//            List<Borrower> borrowerSearch_list = new ArrayList<>();
+//            while (rs.next()) {
+//                int Card_id = rs.getInt("Card_id");
+//                String Ssn = rs.getString("Ssn");
+//                String Bname = rs.getString("Bname");
+//                String Email = rs.getString("Email");
+//                String Address = rs.getString("Address");
+//                String Phone = rs.getString("Phone");
+//                borrowerSearch_list.add(new Borrower(Card_id, Ssn, Bname, Email, Address, Phone));
+//            }
+//            return borrowerSearch_list;
+//        }
+//    }
 }

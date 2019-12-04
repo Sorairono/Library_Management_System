@@ -21,6 +21,7 @@ public class MainController implements Initializable {
 	private Tab tab_books = new Tab("Books");
 	private Tab tab_borrowers = new Tab("Borrowers");;
 	private Tab tab_loans = new Tab("Loans");
+	private Tab tab_fines = new Tab("Fines");
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -34,7 +35,7 @@ public class MainController implements Initializable {
 			System.out.println("Failed to connect");
 		}
 		SingletonController.getInstance().setMain_controller(this);
-		tab_pane_main.getTabs().addAll(tab_books, tab_borrowers, tab_loans);
+		tab_pane_main.getTabs().addAll(tab_books, tab_borrowers, tab_loans, tab_fines);
 		tab_pane_main.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 		
 		try {
@@ -66,6 +67,17 @@ public class MainController implements Initializable {
 			System.out.println("Tab Loans created");
 		} catch (Exception e) {
 			System.out.println("Failed 3");
+		}
+		
+		try {
+			FXMLLoader secondLoader = new FXMLLoader(getClass().getResource("/fxml_document/TabFinesView.fxml"));
+			Parent secondUI = secondLoader.load();
+			SingletonController.getInstance().setTab_fines_controller(secondLoader.getController());
+			tab_fines.setContent(secondUI);
+			System.out.println("Tab Fines created");
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("Failed 4");
 		}
 	}
 
