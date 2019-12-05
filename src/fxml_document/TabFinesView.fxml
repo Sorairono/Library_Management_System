@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.paint.*?>
 <?import com.jfoenix.controls.*?>
 <?import javafx.scene.control.*?>
@@ -7,15 +8,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.TabFinesController">
-   <center>
-      <TableView fx:id="tb_fines" BorderPane.alignment="CENTER" />
-   </center>
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TabFinesController">
    <top>
       <AnchorPane prefHeight="100.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXTextField fx:id="tx_search" focusColor="AQUA" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="50.0" />
+            <JFXTextField fx:id="tf_search" focusColor="AQUA" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="50.0" />
             <Label prefHeight="25.0" prefWidth="50.0" text="Filter" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="50.0" />
             <JFXComboBox fx:id="cb_filter" focusColor="AQUA" prefWidth="175.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
          </children>
@@ -32,8 +29,34 @@
          <children>
             <Label prefHeight="25.0" text="Total: " AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="25.0" />
             <Label fx:id="lb_total" prefHeight="25.0" prefWidth="75.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="25.0" />
-            <JFXButton onAction="#on_pay_fines" text="Pay Fines" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="25.0" />
+            <JFXButton buttonType="RAISED" onAction="#on_pay_fines" text="Pay Fines" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="25.0" />
          </children>
       </AnchorPane>
    </bottom>
+   <center>
+      <SplitPane dividerPositions="0.35" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane>
+               <children>
+                  <TableView fx:id="tv_borrowers" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
+                  <Label alignment="CENTER" prefHeight="25.0" text="Borrowers" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="12.5">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+          <AnchorPane>
+               <children>
+                  <TableView fx:id="tv_fines" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+                  <Label alignment="CENTER" prefHeight="25.0" text="Fines" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="12.5">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </center>
 </BorderPane>

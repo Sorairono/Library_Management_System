@@ -1,7 +1,7 @@
 package model;
 
 public class Book {
-	private String ISBN10;
+	private String Isbn;
 	private String ISBN13;
 	private String Title;
 	private String Cover;
@@ -17,7 +17,7 @@ public class Book {
 	public Book(String iSBN10, String iSBN13, String title, String cover, String publisher, String author, int pages,
 			boolean checked_out) {
 		super();
-		ISBN10 = iSBN10;
+		Isbn = iSBN10;
 		ISBN13 = iSBN13;
 		Title = title;
 		Cover = cover;
@@ -27,12 +27,12 @@ public class Book {
 		Checked_out = checked_out;
 	}
 
-	public String getISBN10() {
-		return ISBN10;
+	public String getIsbn() {
+		return Isbn;
 	}
 
-	public void setISBN10(String iSBN10) {
-		ISBN10 = iSBN10;
+	public void setIsbn(String isbn) {
+		Isbn = isbn;
 	}
 
 	public String getISBN13() {

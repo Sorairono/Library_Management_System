@@ -68,12 +68,7 @@ public class TabBooksController implements Initializable {
 					dialogStage.initOwner(Main.getInstance().getPrimaryStage());
 					dialogStage.initModality(Modality.WINDOW_MODAL);
 					Singleton.getInstance().setDialogStage(dialogStage);
-//					dialogStage.setOnHiding(ev -> {
-//						load_books_list();
-//						System.out.println("Refreshed book list");
-//					});
-					dialogStage.showAndWait();
-					SingletonController.getInstance().refresh_data();
+					dialogStage.show();
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
@@ -84,7 +79,7 @@ public class TabBooksController implements Initializable {
 		tc_title.prefWidthProperty().bind(tb_books.widthProperty().multiply(0.4));
 		tc_author.prefWidthProperty().bind(tb_books.widthProperty().multiply(0.4));
 		tc_availability.prefWidthProperty().bind(tb_books.widthProperty().multiply(0.1));
-		tc_isbn.setCellValueFactory(new PropertyValueFactory<Book, String>("ISBN10"));
+		tc_isbn.setCellValueFactory(new PropertyValueFactory<Book, String>("Isbn"));
 		tc_title.setCellValueFactory(new PropertyValueFactory<Book, String>("Title"));
 		tc_author.setCellValueFactory(new PropertyValueFactory<Book, String>("Author"));
 		tc_availability.setCellValueFactory(c -> {
@@ -167,23 +162,23 @@ public class TabBooksController implements Initializable {
 		String search_command = "";
 
 		if (searchThese.get(0).matches("%[\\d]+%")) {
-			search_command += "(SELECT BOOK_AUTHORS.ISBN10, BOOK_AUTHORS.ISBN13, Title, Checked_out, Cover, Publisher, Pages, GROUP_CONCAT(Author SEPARATOR ', ') AS Authors FROM BOOKS NATURAL JOIN BOOK_AUTHORS  WHERE ISBN10 LIKE '"
+			search_command += "(SELECT BOOK_AUTHORS.Isbn, BOOK_AUTHORS.ISBN13, Title, Checked_out, Cover, Publisher, Pages, GROUP_CONCAT(AUTHORS.Name SEPARATOR ', ') AS Authors FROM BOOK NATURAL JOIN BOOK_AUTHORS NATURAL JOIN AUTHORS  WHERE Isbn LIKE '"
 					+ searchThese.get(0) + "' OR ISBN13 LIKE '" + searchThese.get(0)
-					+ "' GROUP BY BOOK_AUTHORS.ISBN10, BOOK_AUTHORS.ISBN13 ) ";
+					+ "' GROUP BY BOOK_AUTHORS.Isbn, BOOK_AUTHORS.ISBN13 ) ";
 		} else {
-			search_command += "(SELECT BOOK_AUTHORS.ISBN10, BOOK_AUTHORS.ISBN13, Title, Checked_out, Cover, Publisher, Pages, GROUP_CONCAT(Author SEPARATOR ', ') AS Authors FROM BOOKS NATURAL JOIN BOOK_AUTHORS  WHERE Title LIKE '"
-					+ searchThese.get(0) + "' OR Author LIKE '" + searchThese.get(0)
-					+ "' GROUP BY BOOK_AUTHORS.ISBN10, BOOK_AUTHORS.ISBN13 ) ";
+			search_command += "(SELECT BOOK_AUTHORS.Isbn, BOOK_AUTHORS.ISBN13, Title, Checked_out, Cover, Publisher, Pages, GROUP_CONCAT(AUTHORS.Name SEPARATOR ', ') AS Authors FROM BOOK NATURAL JOIN BOOK_AUTHORS NATURAL JOIN AUTHORS  WHERE Title LIKE '"
+					+ searchThese.get(0) + "' OR AUTHORS.Name LIKE '" + searchThese.get(0)
+					+ "' GROUP BY BOOK_AUTHORS.Isbn, BOOK_AUTHORS.ISBN13 ) ";
 		}
 		for (int i = 1; i < searchThese.size(); i++) {
 			if (searchThese.get(i).matches("%[\\d]+%")) {
-				search_command += " UNION (SELECT BOOK_AUTHORS.ISBN10, BOOK_AUTHORS.ISBN13, Title, Checked_out, Cover, Publisher, Pages,  GROUP_CONCAT(Author SEPARATOR ', ') AS Authors FROM BOOKS NATURAL JOIN BOOK_AUTHORS  WHERE ISBN10 LIKE '"
+				search_command += " UNION (SELECT BOOK_AUTHORS.Isbn, BOOK_AUTHORS.ISBN13, Title, Checked_out, Cover, Publisher, Pages,  GROUP_CONCAT(AUTHORS.Name SEPARATOR ', ') AS Authors FROM BOOK NATURAL JOIN BOOK_AUTHORS NATURAL JOIN AUTHORS WHERE Isbn LIKE '"
 						+ searchThese.get(i) + "' OR ISBN13 LIKE '" + searchThese.get(i)
-						+ "' GROUP BY BOOK_AUTHORS.ISBN10, BOOK_AUTHORS.ISBN13 ) ";
+						+ "' GROUP BY BOOK_AUTHORS.Isbn, BOOK_AUTHORS.ISBN13 ) ";
 			} else {
-				search_command += " UNION (SELECT BOOK_AUTHORS.ISBN10, BOOK_AUTHORS.ISBN13, Title, Checked_out, Cover, Publisher, Pages, GROUP_CONCAT(Author SEPARATOR ', ') AS Authors FROM BOOKS NATURAL JOIN BOOK_AUTHORS  WHERE Title LIKE '"
-						+ searchThese.get(i) + "' OR Author LIKE '" + searchThese.get(i)
-						+ "' GROUP BY BOOK_AUTHORS.ISBN10, BOOK_AUTHORS.ISBN13 ) ";
+				search_command += " UNION (SELECT BOOK_AUTHORS.Isbn, BOOK_AUTHORS.ISBN13, Title, Checked_out, Cover, Publisher, Pages, GROUP_CONCAT(AUTHORS.Name SEPARATOR ', ') AS Authors FROM BOOK NATURAL JOIN BOOK_AUTHORS NATURAL JOIN AUTHORS WHERE Title LIKE '"
+						+ searchThese.get(i) + "' OR AUTHORS.Name LIKE '" + searchThese.get(i)
+						+ "' GROUP BY BOOK_AUTHORS.Isbn, BOOK_AUTHORS.ISBN13 ) ";
 			}
 		}
 		System.out.println(search_command);

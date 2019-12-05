@@ -4,27 +4,29 @@ import java.sql.Timestamp;
 
 public class Loan {
 	private int Loan_id;
-	private String ISBN10;
+	private String Isbn;
 	private String ISBN13;
-	private int Borrower_id;
+	private int Card_id;
 	private Timestamp Date_out;
 	private Timestamp Due_date;
 	private Timestamp Date_in;
+	private String borrower_name;
 
 	public Loan() {
 
 	}
 
-	public Loan(int loan_id, String iSBN10, String iSBN13, int borrower_id, Timestamp date_out, Timestamp due_date,
-			Timestamp date_in) {
+	public Loan(int loan_id, String iSBN10, String iSBN13, int card_id, Timestamp date_out, Timestamp due_date,
+			Timestamp date_in, String borrower_name) {
 		super();
 		Loan_id = loan_id;
-		ISBN10 = iSBN10;
+		Isbn = iSBN10;
 		ISBN13 = iSBN13;
-		Borrower_id = borrower_id;
+		Card_id = card_id;
 		Date_out = date_out;
 		Due_date = due_date;
 		Date_in = date_in;
+		this.borrower_name = borrower_name;
 	}
 
 	public int getLoan_id() {
@@ -35,12 +37,12 @@ public class Loan {
 		Loan_id = loan_id;
 	}
 
-	public String getISBN10() {
-		return ISBN10;
+	public String getIsbn() {
+		return Isbn;
 	}
 
-	public void setISBN10(String iSBN10) {
-		ISBN10 = iSBN10;
+	public void setIsbn(String isbn) {
+		Isbn = isbn;
 	}
 
 	public String getISBN13() {
@@ -51,12 +53,12 @@ public class Loan {
 		ISBN13 = iSBN13;
 	}
 
-	public int getBorrower_id() {
-		return Borrower_id;
+	public int getCard_id() {
+		return Card_id;
 	}
 
-	public void setBorrower_id(int borrower_id) {
-		Borrower_id = borrower_id;
+	public void setCard_id(int card_id) {
+		Card_id = card_id;
 	}
 
 	public Timestamp getDate_out() {
@@ -81,6 +83,14 @@ public class Loan {
 
 	public void setDate_in(Timestamp date_in) {
 		Date_in = date_in;
+	}
+
+	public String getBorrower_name() {
+		return borrower_name;
+	}
+
+	public void setBorrower_name(String borrower_name) {
+		this.borrower_name = borrower_name;
 	}
 
 }

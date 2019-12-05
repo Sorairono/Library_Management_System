@@ -90,5 +90,6 @@ public class SingletonController {
 		tab_books_controller.load_books_list();
 		tab_borrowers_controller.load_borrowers_list();
 		tab_loans_controller.load_loans_list();
+		tab_fines_controller.load_borrower_list();
 	}
 }

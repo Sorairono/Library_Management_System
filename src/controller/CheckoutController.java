@@ -63,7 +63,7 @@ public class CheckoutController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		Book current_book = SingletonChoice.getInstance().getCurrent_book_choice();
-		isbn_10.setText(current_book.getISBN10());
+		isbn_10.setText(current_book.getIsbn());
 		isbn_13.setText(current_book.getISBN13());
 		title.setText(current_book.getTitle());
 		author.setText(current_book.getAuthor());
@@ -95,6 +95,7 @@ public class CheckoutController implements Initializable {
 					if (SingletonController.getInstance().getSql_connector().insertLoan(current_book,
 							Integer.parseInt(card_no_input.getText()))) {
 						Singleton.getInstance().setDecline_message("Successfully checkout this book");
+						SingletonController.getInstance().refresh_data();
 						try {
 							FXMLLoader fourthLoader = new FXMLLoader(
 									getClass().getResource("/fxml_document/MessagePopup.fxml"));

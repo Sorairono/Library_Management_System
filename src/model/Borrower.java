@@ -1,104 +1,73 @@
 package model;
 
 public class Borrower {
-	private int borrower_id;
-	private String ssn;
-	private String first_name;
-	private String last_name;
-	private String email;
-	private String address;
-	private String city;
-	private String state;
-	private String phone;
+	private int Card_id;
+	private String Ssn;
+	private String Bname;
+	private String Email;
+	private String Address;
+	private String Phone;
 
 	public Borrower() {
 
 	}
 
-	public Borrower(int borrower_id, String ssn, String first_name, String last_name, String email, String address,
-			String city, String state, String phone) {
+	public Borrower(int card_id, String ssn, String bname, String email, String address, String phone) {
 		super();
-		this.borrower_id = borrower_id;
-		this.ssn = ssn;
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.email = email;
-		this.address = address;
-		this.city = city;
-		this.state = state;
-		this.phone = phone;
+		Card_id = card_id;
+		Ssn = ssn;
+		Bname = bname;
+		Email = email;
+		Address = address;
+		Phone = phone;
 	}
 
-	public int getBorrower_id() {
-		return borrower_id;
+	public int getCard_id() {
+		return Card_id;
 	}
 
-	public void setBorrower_id(int borrower_id) {
-		this.borrower_id = borrower_id;
+	public void setCard_id(int card_id) {
+		Card_id = card_id;
 	}
 
 	public String getSsn() {
-		return ssn;
+		return Ssn;
 	}
 
 	public void setSsn(String ssn) {
-		this.ssn = ssn;
+		Ssn = ssn;
 	}
 
-	public String getFirst_name() {
-		return first_name;
+	public String getBname() {
+		return Bname;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
-	}
-
-	public String getLast_name() {
-		return last_name;
-	}
-
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+	public void setBname(String bname) {
+		Bname = bname;
 	}
 
 	public String getEmail() {
-		return email;
+		return Email;
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		Email = email;
 	}
 
 	public String getAddress() {
-		return address;
+		return Address;
 	}
 
 	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
+		Address = address;
 	}
 
 	public String getPhone() {
-		return phone;
+		return Phone;
 	}
 
 	public void setPhone(String phone) {
-		this.phone = phone;
+		Phone = phone;
 	}
 
 }

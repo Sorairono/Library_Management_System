@@ -10,7 +10,7 @@
    <top>
       <AnchorPane prefHeight="100.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXTextField fx:id="tx_search" focusColor="AQUA" layoutX="139.0" layoutY="50.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="50.0" />
+            <JFXTextField fx:id="tf_search" focusColor="AQUA" layoutX="139.0" layoutY="50.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="50.0" />
             <JFXButton onAction="#add_new_borrower" buttonType="RAISED" ripplerFill="AQUA" text="Add New Borrowers" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
          </children></AnchorPane>
    </top>
@@ -18,7 +18,7 @@
       <AnchorPane prefWidth="100.0" BorderPane.alignment="CENTER" />
    </left>
    <center>
-      <TableView fx:id="tv_borrowers" BorderPane.alignment="CENTER" />
+      <TableView fx:id="tb_borrowers" BorderPane.alignment="CENTER" />
    </center>
    <right>
       <AnchorPane prefWidth="100.0" BorderPane.alignment="CENTER" />
