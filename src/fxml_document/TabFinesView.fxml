@@ -12,9 +12,10 @@
    <top>
       <AnchorPane prefHeight="100.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXTextField fx:id="tf_search" focusColor="AQUA" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="50.0" />
+            <JFXTextField fx:id="tf_search" focusColor="AQUA" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="50.0" />
             <Label prefHeight="25.0" prefWidth="50.0" text="Filter" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="50.0" />
             <JFXComboBox fx:id="cb_filter" focusColor="AQUA" prefWidth="175.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
+            <JFXButton onAction="#on_refresh" prefWidth="75.0" text="Refresh" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="50.0" />
          </children>
       </AnchorPane>
    </top>

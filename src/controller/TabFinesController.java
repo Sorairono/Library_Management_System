@@ -155,6 +155,16 @@ public class TabFinesController implements Initializable {
 			alert.show();
 		}
 	}
+	
+	@FXML
+	private void on_refresh() {
+		try {
+			sql_connector.refresh_fines();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public void load_fines_list() {
 		try {

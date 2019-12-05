@@ -150,16 +150,19 @@ public class SQLConnector {
 	}
 	
 	public void check_in_book(int loan_id) throws SQLException {
+		String s1 = "UPDATE BOOK_LOANS SET Date_in = NOW() WHERE Loan_id = ?";
+		String s2 = "UPDATE BOOK SET Checked_out = 0 WHERE Isbn = (SELECT Isbn FROM BOOK_LOANS WHERE Loan_id = ?)";
 		try {
-			Statement stmnt = connection.createStatement();
-			String s1 = "UPDATE BOOK_LOANS SET Date_in = NOW() WHERE Loan_id = " + loan_id;
-			String s2 = "UPDATE BOOK SET Checked_out = 0 WHERE Isbn = (SELECT Isbn FROM BOOK_LOANS WHERE Loan_id = " + loan_id + ")";
-			stmnt.addBatch(s1);
-			stmnt.addBatch(s2);
-			stmnt.executeBatch();
+			PreparedStatement preparedStatement1 = connection.prepareStatement(s1);
+			preparedStatement1.setInt(1, loan_id);
+			preparedStatement1.execute();
+			PreparedStatement preparedStatement2 = connection.prepareStatement(s2);
+			preparedStatement2.setInt(1, loan_id);
+			preparedStatement2.execute();
 			System.out.println("Check in successfully");
 		} catch (SQLException e) {
 			// TODO: handle exception
+			System.out.println(e.getMessage());
 			System.out.println("Failed to check in");
 		}
 	}
@@ -235,6 +238,37 @@ public class SQLConnector {
 			preparedStatement.execute();
 		} catch (SQLException e) {
 			// TODO: handle exception
+		}
+	}
+	
+	public void refresh_fines() throws SQLException {
+		String s1 = "CREATE TEMPORARY TABLE TEMP_LOANS(Loan_id INT)";
+		String s2 = "INSERT INTO TEMP_LOANS (SELECT Loan_id FROM FINES)";
+		String s3 = "INSERT INTO FINES (SELECT  Loan_id, 0.25*(TIMESTAMPDIFF(DAY,Due_date, NOW())), 0 FROM  BOOK_LOANS WHERE NOW() > Due_date AND Date_in IS NULL AND Loan_id NOT IN (SELECT Loan_id FROM TEMP_LOANS))";
+		String s4 = "INSERT INTO FINES (SELECT  Loan_id, 0.25*(TIMESTAMPDIFF(DAY,Due_date, Date_in)), 0 FROM  BOOK_LOANS WHERE Date_in > Due_date AND Date_in IS NOT NULL AND Loan_id NOT IN (SELECT Loan_id FROM TEMP_LOANS))";
+		String s5 = "UPDATE FINES SET Fine_amt = (SELECT 0.25*(TIMESTAMPDIFF(DAY,Due_date, Date_in)) FROM BOOK_LOANS WHERE FINES.Loan_id = BOOK_LOANS.Loan_id AND Date_in IS NOT NULL AND Paid = 0)";
+		String s6 = "UPDATE FINES SET Fine_amt = (SELECT 0.25*(TIMESTAMPDIFF(DAY,Due_date, NOW())) FROM BOOK_LOANS WHERE FINES.Loan_id = BOOK_LOANS.Loan_id AND Date_in IS NULL AND Paid = 0)";
+		String s7 = "DROP TEMPORARY TABLE TEMP_LOANS";
+		try {
+			PreparedStatement stmnt1 = connection.prepareStatement(s1);
+			stmnt1.execute();
+			PreparedStatement stmnt2 = connection.prepareStatement(s2);
+			stmnt2.execute();
+			PreparedStatement stmnt3 = connection.prepareStatement(s3);
+			stmnt3.execute();
+			PreparedStatement stmnt4 = connection.prepareStatement(s4);
+			stmnt4.execute();
+			PreparedStatement stmnt5 = connection.prepareStatement(s5);
+			stmnt5.execute();
+			PreparedStatement stmnt6 = connection.prepareStatement(s6);
+			stmnt6.execute();
+			PreparedStatement stmnt7 = connection.prepareStatement(s7);
+			stmnt7.execute();
+			System.out.println("Refreshed succesfully");
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+			System.out.println("Failed to refresh");
 		}
 	}
 }
